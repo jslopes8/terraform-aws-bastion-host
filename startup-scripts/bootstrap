@@ -1,0 +1,24 @@
+#cloud-config
+preserve_hostname: false
+hostname: bastion-hub
+fqdn: bastion-hub
+manage_etc_hosts: true
+
+# update all installed packages
+repo_upgrade: all
+repo_update: all
+package_upgrade: true
+ 
+# Install PKG
+packages:
+  - telnet 
+  - mariadb
+
+users:
+  - default
+  - name: bastion-admin
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ......
